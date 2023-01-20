@@ -11,8 +11,7 @@ print(me.get("place_of_residence"))
 
 me["favorite_dessert"] = "ice_cream"
 
-del me["year_of_birth"]
-print(me)
+
 
 for k, v in me.items():
     print(k, v)
@@ -26,13 +25,12 @@ else:
 
 print(len(me))
 
-me = {
-    "height": "1.8",
-}
+me["height"] = "1.8"
 
 print(me.get("height"))
 
-
+del me["year_of_birth"]
+print(me)
 
 me.clear()
 
