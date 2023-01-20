@@ -29,10 +29,10 @@ me = {
     "year_of_birth": 2006,
     "place_of_residence": "Muhu",
     "favorite_dessert": "caramel_pudding",
-    "length": "1.80m"
+    "height": "1.8"
 }
 
-print(me.get("length"))
+print(me.get("height"))
 
 del me["year_of_birth"]
 print(me)
