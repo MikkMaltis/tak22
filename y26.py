@@ -1,15 +1,22 @@
-def sales(data):
-    lines = [line.strip().split() for line in data.split("\n") if line]
+def parse_input(sales_input):
+    data = inp.split("\n\n")    
+    sales = {data[0].strip(): data[1], data[2].strip(): data[3]}
+    for k, v in sales.items():
+        rows = [[elem.strip() for elem in r.split()]
+                for r in v.splitlines()]
+        df = pd.DataFrame(rows[1:])
+        df.set_index(0, inplace=True)
+        df.columns = rows[0]
+        df = df.apply(pd.to_numeric)
+        sales[k] = df
+    return sales
 
-    _, *revenue = zip(*lines[2:len(lines)//2])
-    _, *expenses = zip(*lines[2+len(lines)//2:])
-
-    commission = [sum(max(0, int(r)-int(e))*.062 for r, e in zip(*data)) for data in zip(revenue, expenses)]
-
-    print(f"           {' '.join(lines[1])}")
-    print(f"Commission {' '.join([f'{value//1:>{len(name)}.0f}' for value, name in zip(commission, lines[1])])}")
-
-    sales('''Revenue
+def get_commission(sales_data):
+    profit = sales["Revenue"] - sales["Expenses"]
+    commission = profit*.062
+    commission[commission < 0] = 0
+    commission = commission.sum()
+    return pd.DataFrame({"Commission": commission}).transpose()
 
             Johnver Vanston Danbree Vansey  Mundyke
 Tea             190     140    1926     14      143
