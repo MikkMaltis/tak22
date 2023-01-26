@@ -88,4 +88,4 @@ for employee_name, employee_sales in sales.items():
         if value - employee_sales ["expenses"][product] > 0:
             print('Kasum on pos', profit + 0.062)
         commission += profit + 0.062
-        print('Commission', commission)
+        print(int(commission))
